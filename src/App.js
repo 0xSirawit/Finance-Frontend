@@ -1,21 +1,22 @@
-import './App.css';
-import axios from 'axios'
-import LoginScreen from './LoginScreen';
-import { useState } from 'react';
-import FinanceScreen from './components/FinanceScreen';
+import axios from "axios";
+import LoginScreen from "./pages/LoginScreen";
+import RequiredAuth from "./components/RequireAuth";
+import FinanceScreen from "./pages/FinanceScreen";
+import HomeScreen from "./pages/HomeScreen";
+import { Routes, BrowserRouter, Route } from "react-router-dom";
+axios.defaults.baseURL =
+  process.env.REACT_APP_BASE_URL || "http://localhost:1337";
 
-axios.defaults.baseURL = process.env.REACT_APP_BASE_URL || "http://localhost:1337"
-function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
-  const handleLoginSuccess = () => { 
-    setIsAuthenticated(true)
-  }
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        {isAuthenticated ? <FinanceScreen/> : <LoginScreen onLoginSuccess={handleLoginSuccess} />}
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/login" element={<LoginScreen />} />
+        <Route path="/home" element={<HomeScreen />} />
+        <Route element={<RequiredAuth />}>
+          <Route path="/" element={<FinanceScreen />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
-export default App;

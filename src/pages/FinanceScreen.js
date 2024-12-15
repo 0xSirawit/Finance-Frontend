@@ -1,8 +1,7 @@
-import "../App.css";
-import TransactionList from "./TransactionList";
+import TransactionList from "../components/TransactionList";
 import { useEffect, useState } from "react";
 import dayjs from "dayjs";
-import AddItem from "./AddItem";
+import AddItem from "../components/AddItem";
 import { Divider, Typography, Spin } from "antd";
 import axios from "axios";
 const URL_TXACTIONS = "/api/txactions";
