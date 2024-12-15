@@ -1,4 +1,4 @@
-import { Table, Button, Tag } from "antd";
+import { Table, Button, Tag, Flex } from "antd";
 import dayjs from "dayjs";
 
 export default function TransactionList(props) {
@@ -7,7 +7,8 @@ export default function TransactionList(props) {
       title: "Date-Time",
       dataIndex: "action_datetime",
       key: "action_datetime",
-      render: (_, record) => dayjs(record.action_datetime).format("DD/MM/YYYY - HH:mm")
+      render: (_, record) =>
+        dayjs(record.action_datetime).format("DD/MM/YYYY - HH:mm"),
     },
     {
       title: "Type",
@@ -35,12 +36,24 @@ export default function TransactionList(props) {
     {
       title: "Action",
       key: "action",
-      render: (_, record ) => (
-        <Button danger onClick={() => props.onTransactionDelete(record.id)}>
-          Delete
-        </Button>
+      width: '18%',
+      render: (_, record) => (
+        <Flex wrap gap="small">
+          <Button color="primary" variant="outlined" onClick={()=> props.onTransactionEdit(record)}>Edit</Button>
+          <Button danger onClick={() => props.onTransactionDelete(record.id)}>
+            Delete
+          </Button>
+        </Flex>
       ),
     },
   ];
-  return <Table dataSource={props.data} columns={columns} />;
+  return (
+    <Table
+      rowKey={(record) => record.id}
+      bordered={true}
+      pagination={{ pageSize: 5 }}
+      dataSource={props.data}
+      columns={columns}
+    />
+  );
 }

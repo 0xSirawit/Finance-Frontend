@@ -44,7 +44,7 @@ export default function HomeScreen() {
         />
       </Sider>
       <Layout>
-        <header style={{ paddingLeft: 35, background: colorBgContainer}}><h2>TransactionList</h2></header>
+        <header style={{ paddingLeft: 36, background: colorBgContainer}}><h2>TransactionList</h2></header>
         <Content style={{ margin: "16px 16px" }}>
           <div
             style={{
