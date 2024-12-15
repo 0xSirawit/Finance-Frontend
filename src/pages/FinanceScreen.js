@@ -56,13 +56,13 @@ function FinanceScreen() {
 
   const handleTransactionDelete = async (id) => {
     try {
-      setIsLoading(true)
-      await axios.delete(`${URL_TXACTIONS}/${id}`)
-      fetchItems()
+      setIsLoading(true);
+      await axios.delete(`${URL_TXACTIONS}/${id}`);
+      fetchItems();
     } catch (err) {
-      console.log(err)
+      console.log(err);
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
   };
 
@@ -93,22 +93,20 @@ function FinanceScreen() {
   };
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <Spin spinning={isLoading}>
-          <Typography.Title>Current Amount {amount} THB</Typography.Title>
-          <AddItem onItemAdded={handleAddItem} />
-          <Divider plain>
-            <h3>Transactions</h3>
-          </Divider>
-          <TransactionList
-            data={transactionData}
-            onNoteChanged={handleNoteChaged}
-            onTransactionDelete={handleTransactionDelete}
-          />
-        </Spin>
-      </header>
-    </div>
+    <>
+      <Spin spinning={isLoading}>
+        <h1>Current Amount {amount} THB</h1>
+        <AddItem onItemAdded={handleAddItem} />
+        <Divider plain>
+          <h3>Transactions</h3>
+        </Divider>
+        <TransactionList
+          data={transactionData}
+          onNoteChanged={handleNoteChaged}
+          onTransactionDelete={handleTransactionDelete}
+        />
+      </Spin>
+    </>
   );
 }
 

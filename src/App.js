@@ -12,8 +12,8 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={<LoginScreen />} />
-        <Route path="/home" element={<HomeScreen />} />
         <Route element={<RequiredAuth />}>
+          <Route path="/home" element={<HomeScreen />} />
           <Route path="/" element={<FinanceScreen />} />
         </Route>
       </Routes>

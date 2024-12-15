@@ -31,7 +31,7 @@ export default function RequiredAuth() {
   }, []);
 
   if (isAuthenticated === null) {
-    return <div>Loading...</div>;
+    return
   }
 
   return isAuthenticated ? <Outlet /> : <Navigate to="/login" />;
