@@ -20,7 +20,7 @@ const items = [
   getItem("Dashboard", "1", <PieChartOutlined />),
   getItem("Transactions", "2", <FileOutlined />),
   getItem("User", "3", <UserOutlined />),
-  getItem("Logout","4",<LogoutOutlined />)
+  getItem("Logout", "4", <LogoutOutlined />),
 ];
 
 export default function HomeScreen() {
@@ -44,7 +44,9 @@ export default function HomeScreen() {
         />
       </Sider>
       <Layout>
-        <header style={{ paddingLeft: 36, background: colorBgContainer}}><h2>TransactionList</h2></header>
+        <header style={{ paddingLeft: 36, background: colorBgContainer }}>
+          <h2>TransactionList</h2>
+        </header>
         <Content style={{ margin: "16px 16px" }}>
           <div
             style={{
@@ -54,10 +56,10 @@ export default function HomeScreen() {
               borderRadius: borderRadiusLG,
             }}
           >
-            <FinanceScreen/>
+            <FinanceScreen />
           </div>
         </Content>
-        <Footer style={{ textAlign: "center",}}></Footer>
+        <Footer style={{ textAlign: "center" }}></Footer>
       </Layout>
     </Layout>
   );

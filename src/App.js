@@ -14,7 +14,6 @@ export default function App() {
         <Route path="/login" element={<LoginScreen />} />
         <Route element={<RequiredAuth />}>
           <Route path="/home" element={<HomeScreen />} />
-          <Route path="/" element={<FinanceScreen />} />
         </Route>
       </Routes>
     </BrowserRouter>
