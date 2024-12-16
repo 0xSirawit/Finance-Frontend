@@ -67,7 +67,7 @@ function FinanceScreen() {
     }
   };
 
-  const handleTransactionEdit = async (data) => {
+  const handleTransactionEdit = (data) => {
     setItem(data);
     setIsOpen(true);
   };

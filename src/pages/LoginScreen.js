@@ -30,7 +30,7 @@ export default function LoginScreen() {
         justifyContent: "center",
         alignItems: "center",
         display: "flex",
-        background: "linear-gradient(135deg, #001628, #002140)",
+        background: "linear-gradient(90deg, #001628,#1c64a3)",
         color: "white",
         height: "100vh",
         width: "100vw",
@@ -66,7 +66,7 @@ export default function LoginScreen() {
           </Form.Item>
           <Form.Item>
             <Button
-              style={{ width: "100%" }}
+              style={{ width: "100%", height:"6vh" }}
               type="primary"
               htmlType="submit"
               loading={isLoading}
