@@ -53,38 +53,22 @@ export default function LoginScreen() {
                 }}
             >
                 <h1>Login</h1>
-                <Form
-                    onFinish={handleLogin}
-                    autoComplete="off"
-                    style={{ width: "25vw" }}
-                >
+                <Form onFinish={handleLogin} autoComplete="off" style={{ width: "25vw" }}>
                     {errMsg && (
                         <Form.Item>
                             <Alert message={errMsg} type="error" />
                         </Form.Item>
                     )}
                     <Form.Item name="identifier" rules={[{ required: true }]}>
-                        <Input
-                            placeholder="Username"
-                            prefix={<UserOutlined />}
-                        />
+                        <Input placeholder="Username" prefix={<UserOutlined />} />
                     </Form.Item>
 
                     <Form.Item name="password" rules={[{ required: true }]}>
-                        <Input.Password
-                            placeholder="Password"
-                            prefix={<LockOutlined />}
-                        />
+                        <Input.Password placeholder="Password" prefix={<LockOutlined />} />
                     </Form.Item>
 
-                    <Form.Item
-                        name="remember"
-                        valuePropName="checked"
-                        label={null}
-                    >
-                        <Checkbox style={{ userSelect: "none" }}>
-                            Remember me
-                        </Checkbox>
+                    <Form.Item name="remember" valuePropName="checked" label={null}>
+                        <Checkbox style={{ userSelect: "none" }}>Remember me</Checkbox>
                     </Form.Item>
 
                     <Form.Item>

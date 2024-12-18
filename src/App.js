@@ -3,8 +3,7 @@ import LoginScreen from "./pages/LoginScreen";
 import RequiredAuth from "./components/RequireAuth";
 import HomeScreen from "./pages/HomeScreen";
 import { Routes, BrowserRouter, Route } from "react-router-dom";
-axios.defaults.baseURL =
-    process.env.REACT_APP_BASE_URL || "http://localhost:1337";
+axios.defaults.baseURL = process.env.REACT_APP_BASE_URL || "http://localhost:1337";
 
 export default function App() {
     return (

@@ -1,18 +1,19 @@
 import TransactionList from "../components/TransactionList";
 import EditItem from "../components/EditItem";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import dayjs from "dayjs";
 import AddItem from "../components/AddItem";
 import { Divider, Spin } from "antd";
 import axios from "axios";
+import { TransactionContext } from "../components/TransactionContext";
 const URL_TXACTIONS = "/api/txactions";
 
-function FinanceScreen() {
+function Finance() {
     const [amount, setAmount] = useState(0);
     const [isOpen, setIsOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [item, setItem] = useState(null);
-    const [transactionData, setTransactionData] = useState([]);
+    const { transactionData, setTransactionData } = useContext(TransactionContext);
 
     const fetchItems = async () => {
         try {
@@ -38,9 +39,7 @@ function FinanceScreen() {
         setAmount(
             transactionData.reduce(
                 (sum, transaction) =>
-                    transaction.type === "income"
-                        ? (sum += transaction.amount)
-                        : (sum -= transaction.amount),
+                    transaction.type === "income" ? (sum += transaction.amount) : (sum -= transaction.amount),
                 0
             )
         );
@@ -49,8 +48,7 @@ function FinanceScreen() {
     const handleNoteChaged = (id, note) => {
         setTransactionData(
             transactionData.map((transaction) => {
-                transaction.note =
-                    transaction.id === id ? note : transaction.note;
+                transaction.note = transaction.id === id ? note : transaction.note;
                 return transaction;
             })
         );
@@ -87,6 +85,7 @@ function FinanceScreen() {
                           amount: itemData.amount,
                           type: itemData.type,
                           note: itemData.note,
+                          category: itemData.category,
                       }
                     : record
             );
@@ -126,12 +125,7 @@ function FinanceScreen() {
             <Spin spinning={isLoading}>
                 <h1>Current Amount {amount} THB</h1>
                 <AddItem onItemAdded={handleAddItem} />
-                <EditItem
-                    isOpen={isOpen}
-                    updateIsOpen={handleUpdateOpen}
-                    item={item}
-                    onItemEdited={updateItem}
-                />
+                <EditItem isOpen={isOpen} updateIsOpen={handleUpdateOpen} item={item} onItemEdited={updateItem} />
                 <Divider plain>
                     <h3>Transactions</h3>
                 </Divider>
@@ -146,4 +140,4 @@ function FinanceScreen() {
     );
 }
 
-export default FinanceScreen;
+export default Finance;
