@@ -50,7 +50,6 @@ export default function HomeScreen() {
 
     const handleMenuClick = (menu) => {
         updateRender(menu.key);
-        console.log(menu.key);
     };
 
     return (

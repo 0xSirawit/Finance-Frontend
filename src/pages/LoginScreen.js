@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Form, Input, Alert } from "antd";
+import { Button, Form, Input, Alert, Checkbox } from "antd";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
@@ -10,14 +10,20 @@ export default function LoginScreen() {
     const [isLoading, setIsLoading] = useState(false);
     const [errMsg, setErrMsg] = useState(null);
     const navigate = useNavigate();
+
     async function handleLogin(formData) {
+        console.log(formData);
         try {
             setIsLoading(true);
             setErrMsg(null);
+            delete axios.defaults.headers.common["Authorization"];
             const response = await axios.post(URL_AUTH, formData);
             const token = response.data.jwt;
-            Cookies.set("token", token, { expires: 1, path: "/" });
-            navigate("/home", { replace: true });
+            Cookies.set("token", token, {
+                expires: formData.remember ? 30 : null,
+                path: "/",
+            });
+            navigate("/", { replace: true });
         } catch (err) {
             setErrMsg(err.message);
         } finally {
@@ -70,6 +76,17 @@ export default function LoginScreen() {
                             prefix={<LockOutlined />}
                         />
                     </Form.Item>
+
+                    <Form.Item
+                        name="remember"
+                        valuePropName="checked"
+                        label={null}
+                    >
+                        <Checkbox style={{ userSelect: "none" }}>
+                            Remember me
+                        </Checkbox>
+                    </Form.Item>
+
                     <Form.Item>
                         <Button
                             style={{ width: "100%", height: "6vh" }}

@@ -7,6 +7,7 @@ export default function EditItem(props) {
     useEffect(() => {
         if (props.isOpen) {
             form.setFieldsValue(props.item);
+            console.log(props.item);
             props.updateIsOpen(true);
         }
     }, [props.isOpen, props.item, form]);
@@ -53,12 +54,46 @@ export default function EditItem(props) {
                             ]}
                         />
                     </Form.Item>
+                    {props.item?.category && (
+                        <Form.Item
+                            name="category"
+                            label="ประเภท"
+                            rules={[{ required: true }]}
+                        >
+                            <Select
+                                allowClear
+                                style={{ width: "100px" }}
+                                options={[
+                                    {
+                                        value: "food",
+                                        label: "อาหาร",
+                                    },
+                                    {
+                                        value: "shopping",
+                                        label: "ช้อปปิ้ง",
+                                    },
+                                    {
+                                        value: "travel",
+                                        label: "เที่ยว",
+                                    },
+                                    {
+                                        value: "entertainment",
+                                        label: "บังเทิง",
+                                    },
+                                    {
+                                        value: "etc",
+                                        label: "อิ่นๆ",
+                                    },
+                                ]}
+                            />
+                        </Form.Item>
+                    )}
                     <Form.Item
                         name="amount"
                         label="จํานวนเงิน"
                         rules={[{ required: true }]}
                     >
-                        <InputNumber placeholder="จํานวนเงิน" />
+                        <InputNumber placeholder="จํานวนเงิน" min={0} />
                     </Form.Item>
                     <Form.Item
                         name="note"

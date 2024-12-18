@@ -77,7 +77,7 @@ function FinanceScreen() {
     };
     const updateItem = async (itemData) => {
         try {
-            const response = await axios.put(`${URL_TXACTIONS}/${item.id}`, {
+            await axios.put(`${URL_TXACTIONS}/${item.id}`, {
                 data: itemData,
             });
             const updatedTransactionData = transactionData.map((record) =>
