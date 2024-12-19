@@ -6,6 +6,9 @@ import AddItem from "../components/AddItem";
 import { Divider, Spin } from "antd";
 import axios from "axios";
 import { TransactionContext } from "../components/TransactionContext";
+import { jwtDecode } from "jwt-decode";
+import Cookies from "js-cookie";
+
 const URL_TXACTIONS = "/api/txactions";
 
 function Finance() {
@@ -18,7 +21,9 @@ function Finance() {
     const fetchItems = async () => {
         try {
             setIsLoading(true);
-            const response = await axios.get(URL_TXACTIONS);
+            const response = await axios.get(
+                `${URL_TXACTIONS}?filters[creator][id][$eq]=${jwtDecode(Cookies.get("token")).id}`
+            );
             setTransactionData(
                 response.data.data.map((data) => ({
                     id: data.id,
@@ -102,6 +107,7 @@ function Finance() {
             const params = {
                 ...itemData,
                 action_datetime: dayjs(),
+                creator: jwtDecode(Cookies.get("token")).id,
             };
             const response = await axios.post(URL_TXACTIONS, { data: params });
             const { id, attributes } = response.data.data;
