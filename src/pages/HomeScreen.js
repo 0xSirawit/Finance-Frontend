@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Finance from "./Finance";
 import Dashboard from "./Dashboard";
+import Profile from "./Profile";
 import FooterLink from "../components/FooterLink";
 import Logout from "../components/Logout";
 import TransactionContextProvider from "../components/TransactionContext";
@@ -33,7 +34,7 @@ export default function HomeScreen() {
     const components = {
         1: <Finance />,
         2: <Dashboard />,
-        3: <div>Profile</div>,
+        3: <Profile />,
         4: <Logout />,
     };
 

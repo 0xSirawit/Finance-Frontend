@@ -73,38 +73,36 @@ export default function EditItem(props) {
     };
 
     return (
-        <>
-            <Modal title="Edit Transaction" open={props.isOpen} onOk={handleOk} onCancel={handleCancle} okText="Edit">
-                <Form layout="block" onFinish={props.onItemAdded} form={form}>
-                    <Form.Item name="type" label="ชนิด" rules={[{ required: true }]}>
-                        <Select
-                            onSelect={handleSelect}
-                            onClear={handleClear}
-                            allowClear
-                            style={{ width: "100px" }}
-                            options={[
-                                {
-                                    value: "income",
-                                    label: "รายรับ",
-                                },
-                                {
-                                    value: "expense",
-                                    label: "รายจ่าย",
-                                },
-                            ]}
-                        />
-                    </Form.Item>
-                    <Form.Item name="category" label="ประเภท" rules={[{ required: true }]}>
-                        <Select allowClear style={{ width: "100px" }} options={type ? optionsCategory[type] : []} />
-                    </Form.Item>
-                    <Form.Item name="amount" label="จํานวนเงิน" rules={[{ required: true }]}>
-                        <InputNumber placeholder="จํานวนเงิน" min={0} />
-                    </Form.Item>
-                    <Form.Item name="note" label="หมายเหตุ" rules={[{ required: true }]}>
-                        <Input placeholder="Note" />
-                    </Form.Item>
-                </Form>
-            </Modal>
-        </>
+        <Modal title="Edit Transaction" open={props.isOpen} onOk={handleOk} onCancel={handleCancle} okText="Edit">
+            <Form layout="block" onFinish={props.onItemAdded} form={form} requiredMark={false}>
+                <Form.Item name="type" label="ชนิด" rules={[{ required: true }]}>
+                    <Select
+                        onSelect={handleSelect}
+                        onClear={handleClear}
+                        allowClear
+                        style={{ width: "100px" }}
+                        options={[
+                            {
+                                value: "income",
+                                label: "รายรับ",
+                            },
+                            {
+                                value: "expense",
+                                label: "รายจ่าย",
+                            },
+                        ]}
+                    />
+                </Form.Item>
+                <Form.Item name="category" label="ประเภท" rules={[{ required: true }]}>
+                    <Select allowClear style={{ width: "100px" }} options={type ? optionsCategory[type] : []} />
+                </Form.Item>
+                <Form.Item name="amount" label="จํานวนเงิน" rules={[{ required: true }]}>
+                    <InputNumber placeholder="จํานวนเงิน" min={0} />
+                </Form.Item>
+                <Form.Item name="note" label="หมายเหตุ" rules={[{ required: true }]}>
+                    <Input placeholder="Note" />
+                </Form.Item>
+            </Form>
+        </Modal>
     );
 }

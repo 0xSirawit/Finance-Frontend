@@ -47,7 +47,7 @@ export default function AddItem(props) {
     };
 
     return (
-        <Form layout="inline" onFinish={props.onItemAdded} form={form}>
+        <Form layout="inline" onFinish={props.onItemAdded} form={form} requiredMark={false}>
             <Form.Item name="type" label="ชนิด" rules={[{ required: true }]}>
                 <Select
                     onSelect={handleSelect}
@@ -71,7 +71,7 @@ export default function AddItem(props) {
             </Form.Item>
 
             <Form.Item name="amount" label="จํานวนเงิน" rules={[{ required: true }]}>
-                <InputNumber placeholder="จํานวนเงิน" />
+                <InputNumber placeholder="จํานวนเงิน" min={0} />
             </Form.Item>
             <Form.Item name="note" label="หมายเหตุ" rules={[{ required: true }]}>
                 <Input placeholder="Note" />

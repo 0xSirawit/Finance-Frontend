@@ -6,6 +6,7 @@ const URL_CHECKAUTH = "/api/users/me";
 
 export default function RequiredAuth() {
     const [isAuthenticated, setIsAuthenticated] = useState(null);
+    const [userInfo, setUserInfo] = useState(null);
 
     useEffect(() => {
         async function checkAuth() {
@@ -20,6 +21,7 @@ export default function RequiredAuth() {
                 };
                 const response = await axios.get(URL_CHECKAUTH);
                 setIsAuthenticated(!!response.data?.username);
+                setUserInfo(response.data);
             } catch (err) {
                 setIsAuthenticated(false);
             }
@@ -32,5 +34,5 @@ export default function RequiredAuth() {
         return;
     }
 
-    return isAuthenticated ? <Outlet /> : <Navigate to="/login" />;
+    return isAuthenticated ? <Outlet context={{ userInfo, setUserInfo }} /> : <Navigate to="/login" />;
 }

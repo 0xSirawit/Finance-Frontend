@@ -3,7 +3,7 @@ import EditItem from "../components/EditItem";
 import { useEffect, useState, useContext } from "react";
 import dayjs from "dayjs";
 import AddItem from "../components/AddItem";
-import { Divider, Spin } from "antd";
+import { Divider, Spin, message } from "antd";
 import axios from "axios";
 import { TransactionContext } from "../components/TransactionContext";
 import { jwtDecode } from "jwt-decode";
@@ -80,6 +80,7 @@ function Finance() {
     };
     const updateItem = async (itemData) => {
         try {
+            setIsLoading(true);
             await axios.put(`${URL_TXACTIONS}/${item.id}`, {
                 data: itemData,
             });
@@ -96,8 +97,13 @@ function Finance() {
             );
             setTransactionData(updatedTransactionData);
             setItem(null);
+            message.success("Transaction updated successfully!");
         } catch (err) {
-            console.log(err);
+            const errorMessage =
+                err.response?.data?.error?.message || "Failed to update transaction. Please try again.";
+            message.error(errorMessage);
+        } finally {
+            setIsLoading(false); // End loading state
         }
     };
 
@@ -119,8 +125,10 @@ function Finance() {
                     ...attributes,
                 },
             ]);
+            message.success("Transaction added successfully!");
         } catch (err) {
-            console.log(err);
+            const errorMessage = err.response?.data?.error?.message || "Failed to add transaction. Please try again.";
+            message.error(errorMessage);
         } finally {
             setIsLoading(false);
         }
