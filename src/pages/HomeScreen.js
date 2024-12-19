@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useOutletContext } from "react-router-dom";
 import Finance from "./Finance";
 import Dashboard from "./Dashboard";
 import Profile from "./Profile";
@@ -25,6 +26,7 @@ const items = [
 ];
 
 export default function HomeScreen() {
+    const { userInfo } = useOutletContext();
     const [collapsed, setCollapsed] = useState(false);
     const [render, updateRender] = useState(1);
     const {
@@ -78,10 +80,15 @@ export default function HomeScreen() {
                     <header
                         style={{
                             paddingLeft: 36,
+                            paddingRight: 36,
                             background: colorBgContainer,
+                            display: "flex",
+                            justifyContent: "space-between",
+                            alignItems: "center",
                         }}
                     >
                         <h2>{layoutTitle[render]}</h2>
+                        <h2>{userInfo.username}</h2>
                     </header>
                     <Content style={{ margin: "16px 16px" }}>
                         <div

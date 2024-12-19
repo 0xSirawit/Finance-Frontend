@@ -45,26 +45,29 @@ function Profile() {
                         </Form.Item>
                     </Row>
                     <Row>
-                        <Form.Item name="first_name" label="First Name" rules={[{ required: true }]}>
-                            <Input placeholder="first name" />
-                        </Form.Item>
-                        <Form.Item name="last_name" label="Last Name" rules={[{ required: true }]}>
-                            <Input placeholder="last name" />
-                        </Form.Item>
-                    </Row>
-                    <Row>
                         <Form.Item name="email" label="Email" rules={[{ required: true }]}>
                             <Input placeholder="email" />
                         </Form.Item>
                     </Row>
                     <Row>
-                        {change && (
-                            <Form.Item>
-                                <Button type="primary" htmlType="submit">
-                                    Save Changes
-                                </Button>
-                            </Form.Item>
-                        )}
+                        <Form.Item name="first_name" label="First Name" rules={[{ required: true }]}>
+                            <Input placeholder="first name" />
+                        </Form.Item>
+                        <Form.Item
+                            name="last_name"
+                            label="Last Name"
+                            rules={[{ required: true }]}
+                            style={{ marginLeft: 12 }}
+                        >
+                            <Input placeholder="last name" />
+                        </Form.Item>
+                    </Row>
+                    <Row>
+                        <Form.Item>
+                            <Button type="primary" htmlType="submit" disabled={!change}>
+                                Save Changes
+                            </Button>
+                        </Form.Item>
                     </Row>
                 </Col>
             </Form>
