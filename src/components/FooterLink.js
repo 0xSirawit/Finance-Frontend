@@ -30,6 +30,7 @@ export default function FooterLink() {
                     key={index}
                     href={link.href}
                     target="_blank"
+                    rel="noopener noreferrer"
                     style={linkStyle(index)}
                     onMouseEnter={() => setHoveredIndex(index)}
                     onMouseLeave={() => setHoveredIndex(null)}
