@@ -66,7 +66,7 @@ function Dashboard() {
     return (
         <>
             <Row justify="space-between">
-                <Col span={7} style={chartContainerStyle}>
+                <Col span={8} style={chartContainerStyle}>
                     <h3>Spending Categories Overview</h3>
                     <Doughnut
                         data={{
@@ -81,7 +81,7 @@ function Dashboard() {
                         }}
                     />
                 </Col>
-                <Col span={14} style={chartContainerStyle}>
+                <Col span={15} style={chartContainerStyle}>
                     <h3>Tracking Daily Income and Expenses</h3>
                     <Line
                         data={{

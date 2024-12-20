@@ -5,21 +5,22 @@ import { Modal } from "antd";
 export default function EditItem(props) {
     const [form] = Form.useForm();
     const [type, setType] = useState("");
+    const { isOpen, item, updateIsOpen, onItemEdited } = props;
 
     useEffect(() => {
-        if (props.isOpen) {
-            setType(props.item.type);
-            form.setFieldsValue(props.item);
-            console.log(props.item);
-            props.updateIsOpen(true);
+        if (isOpen) {
+            setType(item.type);
+            form.setFieldsValue(item);
+            console.log(item);
+            updateIsOpen(true);
         }
-    }, [props.isOpen, props.item, form]);
+    }, [isOpen, item, updateIsOpen, form]);
 
     const handleOk = () => {
         form.validateFields()
             .then((formData) => {
-                props.onItemEdited(formData);
-                props.updateIsOpen(false);
+                onItemEdited(formData);
+                updateIsOpen(false);
             })
             .catch((errorInfo) => {
                 console.error("Validation failed:", errorInfo);
@@ -30,7 +31,7 @@ export default function EditItem(props) {
         setType(null);
     };
     const handleCancle = () => {
-        props.updateIsOpen(false);
+        updateIsOpen(false);
     };
     const handleSelect = (typeValue) => {
         setType(typeValue);

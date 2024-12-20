@@ -36,6 +36,7 @@ function Finance() {
             setIsLoading(false);
         }
     };
+
     useEffect(() => {
         fetchItems();
     }, []);
@@ -75,9 +76,11 @@ function Finance() {
         setItem(data);
         setIsOpen(true);
     };
+
     const handleUpdateOpen = (data) => {
         setIsOpen(data);
     };
+
     const updateItem = async (itemData) => {
         try {
             setIsLoading(true);
@@ -135,22 +138,20 @@ function Finance() {
     };
 
     return (
-        <>
-            <Spin spinning={isLoading}>
-                <h1>Current Amount {amount} THB</h1>
-                <AddItem onItemAdded={handleAddItem} />
-                <EditItem isOpen={isOpen} updateIsOpen={handleUpdateOpen} item={item} onItemEdited={updateItem} />
-                <Divider plain>
-                    <h3>Transactions</h3>
-                </Divider>
-                <TransactionList
-                    data={transactionData}
-                    onNoteChanged={handleNoteChaged}
-                    onTransactionDelete={handleTransactionDelete}
-                    onTransactionEdit={handleTransactionEdit}
-                />
-            </Spin>
-        </>
+        <Spin spinning={isLoading}>
+            <h1>Current Amount {amount} THB</h1>
+            <AddItem onItemAdded={handleAddItem} />
+            <EditItem isOpen={isOpen} updateIsOpen={handleUpdateOpen} item={item} onItemEdited={updateItem} />
+            <Divider plain>
+                <h3>Transactions</h3>
+            </Divider>
+            <TransactionList
+                data={transactionData}
+                onNoteChanged={handleNoteChaged}
+                onTransactionDelete={handleTransactionDelete}
+                onTransactionEdit={handleTransactionEdit}
+            />
+        </Spin>
     );
 }
 
