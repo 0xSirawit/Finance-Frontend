@@ -1,4 +1,4 @@
-import { Doughnut, Line } from "react-chartjs-2";
+import { Doughnut, Bar } from "react-chartjs-2";
 import {
     Chart as ChartJS,
     ArcElement,
@@ -8,13 +8,14 @@ import {
     LinearScale,
     LineElement,
     PointElement,
+    BarElement,
 } from "chart.js";
 
 import { useContext } from "react";
 import { TransactionContext } from "../components/TransactionContext";
 import { Col, Row } from "antd";
 
-ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, LineElement, PointElement);
+ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, LineElement, PointElement, BarElement);
 
 function Dashboard() {
     const { transactionData } = useContext(TransactionContext);
@@ -40,17 +41,17 @@ function Dashboard() {
         const dateMap = {};
 
         filteredData.forEach((item) => {
-            const date = new Date(item.action_datetime).toLocaleDateString(); // Format date
+            const date = new Date(item.action_datetime).toLocaleDateString();
             if (dateMap[date]) {
                 dateMap[date] += item.amount;
             } else {
                 dateMap[date] = item.amount;
             }
         });
-
+        const sortedDates = Object.keys(dateMap).sort((a, b) => new Date(a) - new Date(b));
         return {
-            dates: Object.keys(dateMap),
-            amounts: Object.values(dateMap),
+            dates: sortedDates,
+            amounts: sortedDates.map((date) => dateMap[date]),
         };
     };
 
@@ -83,7 +84,7 @@ function Dashboard() {
                 </Col>
                 <Col span={15} style={chartContainerStyle}>
                     <h3>Tracking Daily Income and Expenses</h3>
-                    <Line
+                    <Bar
                         data={{
                             labels: expenseByDate.dates,
                             datasets: [
@@ -91,14 +92,14 @@ function Dashboard() {
                                     label: "Expense",
                                     data: expenseByDate.amounts,
                                     borderColor: "#FF6384",
-                                    backgroundColor: "rgba(255, 99, 132, 0.2)",
+                                    backgroundColor: "rgba(255, 99, 132, 0.8)",
                                     tension: 0.3,
                                 },
                                 {
                                     label: "Income",
                                     data: incomeByDate.amounts,
                                     borderColor: "#36A2EB",
-                                    backgroundColor: "rgba(54, 162, 235, 0.2)",
+                                    backgroundColor: "rgba(54, 162, 235, 0.8)",
                                     tension: 0.3,
                                 },
                             ],
