@@ -1,6 +1,7 @@
-# Getting Started with Create React App
+# Finance Frontend with React.js
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+By Sirawit Loywirat 6710110443\
+240-124 WEB DESIGNER AND DEVELOPER MODULE
 
 ## Available Scripts
 

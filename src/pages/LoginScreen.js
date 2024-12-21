@@ -24,7 +24,7 @@ export default function LoginScreen() {
             });
             navigate("/", { replace: true });
         } catch (err) {
-            setErrMsg(err.message);
+            setErrMsg(err.response.data.error.message);
         } finally {
             setIsLoading(false);
         }
