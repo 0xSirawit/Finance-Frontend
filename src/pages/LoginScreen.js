@@ -12,7 +12,6 @@ export default function LoginScreen() {
     const navigate = useNavigate();
 
     async function handleLogin(formData) {
-        console.log(formData);
         try {
             setIsLoading(true);
             setErrMsg(null);

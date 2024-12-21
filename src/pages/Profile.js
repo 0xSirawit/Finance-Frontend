@@ -12,7 +12,6 @@ function Profile() {
     const handleFinish = async (userData) => {
         try {
             setIsLoading(true);
-            console.log(userData);
             const response = await axios.put(`${URL_UPDATEPROFILE}${userInfo.id}`, userData);
             setUserInfo({ ...userInfo, ...response.data });
             setChange(false);

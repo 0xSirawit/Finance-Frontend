@@ -11,7 +11,6 @@ export default function EditItem(props) {
         if (isOpen) {
             setType(item.type);
             form.setFieldsValue(item);
-            console.log(item);
             updateIsOpen(true);
         }
     }, [isOpen, item, updateIsOpen, form]);
